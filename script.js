@@ -1,37 +1,16 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const typewriterElement = document.getElementById("typewriter");
-    const enterButton = document.getElementById("enterBtn");
+// Typewriter effect for the welcome text
+let welcomeText = document.getElementById('welcome-text');
+let text = "Welcome to Matthew's Mixtape";
+let i = 0;
 
-    const text = "Welcome to Matthews Mixtape.";
-
-    function typeWriter(text, i = 0) {
-        if (i < text.length) {
-            typewriterElement.innerHTML += text.charAt(i);
-            setTimeout(() => typeWriter(text, i + 1), 100);
-        } else {
-            enterButton.style.display = "inline-block";
-        }
+function typeWriter() {
+    if (i < text.length) {
+        welcomeText.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100); // Adjust typing speed here
     }
+}
 
-    typeWriter(text);
+window.onload = typeWriter;
 
-    enterButton.addEventListener("click", function() {
-        document.getElementById("landing").style.display = "none";
-        window.location.href = "menu.html";  // Navigate to the menu page
-    });
 
-    // Page transition effect
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => {
-        page.classList.remove('show');
-    });
-
-    const showPage = (pageId) => {
-        pages.forEach(page => {
-            page.classList.remove('show');
-        });
-        document.getElementById(pageId).classList.add('show');
-    }
-
-    // Assuming you call showPage() with the appropriate page ID during navigation
-});
